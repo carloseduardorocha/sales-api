@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Sale;
+use App\Models\Seller;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -19,5 +21,8 @@ class DatabaseSeeder extends Seeder
             'email'    => 'test@example.com',
             'password' => Hash::make('MyPassword25!')
         ]);
+
+        Seller::factory(15)->create();
+        Sale::factory(50)->create();
     }
 }
