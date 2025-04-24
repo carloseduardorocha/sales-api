@@ -59,6 +59,11 @@
         "test": [
             "@php artisan config:clear --ansi",
             "@php artisan test"
+        ],
+        "qa": [
+            "./vendor/bin/pint -v",
+            "php artisan test",
+            "./vendor/bin/phpstan analyse -c phpstan.neon --memory-limit 512M"
         ]
     },
     "extra": {
