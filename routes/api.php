@@ -22,11 +22,13 @@ Route::prefix('v1')->group(function() {
 
     Route::middleware(['auth:sanctum'])->group(function() {
         Route::prefix('sellers')->name('sellers.')->group(function() {
-            Route::get('/', [SellerController::class, 'index'])->name('index');
-            Route::post('/', [SellerController::class, 'store'])->name('store');
-            Route::get('/{id}', [SellerController::class, 'show'])->name('show');
-            Route::put('/{id}', [SellerController::class, 'update'])->name('update');
-            Route::delete('/{id}', [SellerController::class, 'destroy'])->name('destroy');
+            Route::controller(SellerController::class)->group(function() {
+                Route::get('/', 'index')->name('index');
+                Route::post('/', 'store')->name('store');
+                Route::get('/{id}', 'show')->name('show');
+                Route::put('/{id}', 'update')->name('update');
+                Route::delete('/{id}', 'destroy')->name('destroy');
+            });
         });
     });
 });
