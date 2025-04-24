@@ -20,7 +20,7 @@ class SellerController extends Controller
     {
         $sellers = $this->seller_service->list();
 
-        return ApiResponse::jsonSuccess(new JsonResource(['data' => $sellers]), Response::HTTP_OK, 'Sellers listed successfully!');
+        return ApiResponse::jsonSuccess(new JsonResource($sellers), Response::HTTP_OK, 'Sellers listed successfully!');
     }
 
     public function store(SellerRequest $request): JsonResponse
@@ -28,14 +28,14 @@ class SellerController extends Controller
         $data   = $request->validated();
         $seller = $this->seller_service->create($data['name'], $data['email']); // @phpstan-ignore-line
 
-        return ApiResponse::jsonSuccess(new JsonResource(['data' => $seller]), Response::HTTP_CREATED, 'Seller created successfully!');
+        return ApiResponse::jsonSuccess(new JsonResource($seller), Response::HTTP_CREATED, 'Seller created successfully!');
     }
 
     public function show(int $id): JsonResponse
     {
         $seller = $this->seller_service->get($id);
 
-        return ApiResponse::jsonSuccess(new JsonResource(['data' => $seller]), Response::HTTP_OK, 'Seller obtained successfuly!');
+        return ApiResponse::jsonSuccess(new JsonResource($seller), Response::HTTP_OK, 'Seller obtained successfuly!');
     }
 
     public function update(SellerRequest $request, int $id): JsonResponse
