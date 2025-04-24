@@ -18,6 +18,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Contracts\SellerContract::class,
             \App\Services\SellerService::class,
         );
+
+        $this->app->bind(
+            \App\Contracts\SaleContract::class,
+            \App\Services\SaleService::class,
+        );
     }
 
     /** Bootstrap any application services. */
