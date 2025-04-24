@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SellerController;
 
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,18 @@ Route::prefix('v1')->group(function() {
                 Route::get('/{id}', 'show')->name('show');
                 Route::put('/{id}', 'update')->name('update');
                 Route::delete('/{id}', 'destroy')->name('destroy');
+            });
+        });
+        Route::prefix('sales')->name('sales.')->group(function() {
+            Route::controller(SaleController::class)->group(function() {
+                Route::get('/', 'index')->name('index');
+                Route::post('/', 'store')->name('store');
+                Route::get('/{id}', 'show')->name('show');
+                Route::put('/{id}', 'update')->name('update');
+                Route::delete('/{id}', 'destroy')->name('destroy');
+
+                Route::get('/seller/{sellerId}/sales', 'getAllSalesBySeller')->name('sales_by_seller');
+                Route::get('/seller/{sellerId}/commission', 'getCommissionBySeller')->name('commission_by_seller');
             });
         });
     });
