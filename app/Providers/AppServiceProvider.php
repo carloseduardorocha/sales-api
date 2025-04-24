@@ -10,8 +10,8 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(
-            \App\Contracts\Auth\AuthContract::class,
-            \App\Services\Auth\AuthService::class,
+            \App\Contracts\AuthContract::class,
+            \App\Services\AuthService::class,
         );
     }
 

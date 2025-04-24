@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services\Auth;
+namespace App\Services;
 
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
-use App\Contracts\Auth\AuthContract;
+use App\Contracts\AuthContract;
 use App\Exceptions\ErrorOnAuthUserException;
 
 class AuthService implements AuthContract

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ApiResponse;
+use App\Contracts\AuthContract;
 use App\Http\Requests\LoginRequest;
-use App\Contracts\Auth\AuthContract;
 use App\Exceptions\ErrorOnAuthUserException;
 
 use Illuminate\Http\Response;
