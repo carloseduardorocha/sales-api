@@ -12,6 +12,26 @@ use Illuminate\Mail\Mailable;
 interface ReportContract
 {
     /**
+     * Sends the admin sales report for all admins for a given period.
+     *
+     * @param Carbon $start_date
+     * @param Carbon $final_date
+     *
+     * @return void
+     */
+    public function sendAdminReportRoutine(Carbon $start_date, Carbon $final_date): void;
+
+    /**
+     * Sends the sales report for all sellers for a given period.
+     *
+     * @param Carbon $start_date
+     * @param Carbon $final_date
+     *
+     * @return void
+     */
+    public function sendSellerReportRoutine(Carbon $start_date, Carbon $final_date): void;
+
+    /**
      * Send an admin report email containing all sales data between the given dates.
      *
      * @param User $user
