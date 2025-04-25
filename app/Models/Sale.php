@@ -68,7 +68,7 @@ class Sale extends Model
     protected $casts = [
         self::AMOUNT     => 'float',
         self::COMMISSION => 'float',
-        self::SALE_DATE  => 'date',
+        self::SALE_DATE  => 'datetime',
         self::DELETED_AT => 'datetime',
         self::CREATED_AT => 'datetime',
         self::UPDATED_AT => 'datetime',

@@ -8,22 +8,18 @@ use App\Models\Seller;
 use App\Helpers\DateRange;
 use App\Helpers\ApiResponse;
 
-use App\Contracts\ReportContract;
-
 use App\Exceptions\UserNotFoundException;
 use App\Exceptions\SellerNotFoundException;
+
+use App\Jobs\SendAdminReportJob;
+use App\Jobs\SendSellerReportJob;
 
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-
 class ReportController extends Controller
 {
-    public function __construct(private ReportContract $report_service)
-    {
-    }
-
     /**
      * Send the admin report for the given user within the date range.
      *
@@ -41,7 +37,7 @@ class ReportController extends Controller
         }
 
         ['start' => $start_date, 'end' => $final_date] = DateRange::daily();
-        $this->report_service->sendAdminReport($admin, $start_date, $final_date); // @phpstan-ignore-line
+        SendAdminReportJob::dispatch($admin, $start_date, $final_date)->onQueue('default');
 
         return ApiResponse::jsonSuccess(new JsonResource([]), Response::HTTP_OK, 'Admin report sent successfully!');
     }
@@ -63,7 +59,7 @@ class ReportController extends Controller
         }
 
         ['start' => $start_date, 'end' => $final_date] = DateRange::daily();
-        $this->report_service->sendSellerReport($seller, $start_date, $final_date); // @phpstan-ignore-line
+        SendSellerReportJob::dispatch($seller, $start_date, $final_date)->onQueue('default');
 
         return ApiResponse::jsonSuccess(new JsonResource([]), Response::HTTP_OK, 'Seller report sent successfully!');
     }

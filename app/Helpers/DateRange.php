@@ -9,7 +9,10 @@ class DateRange
     /**
      * Get the start and end timestamps for yesterday.
      *
-     * @return array<mixed>
+     * @return array{
+     *     start: \Carbon\Carbon,
+     *     end: \Carbon\Carbon
+     * }
      */
     public static function daily(): array
     {
@@ -24,7 +27,10 @@ class DateRange
     /**
      * Get the start and end timestamps for the previous month.
      *
-     * @return array<mixed>
+     * @return array{
+     *     start: \Carbon\Carbon,
+     *     end: \Carbon\Carbon
+     * }
      */
     public static function monthly(): array
     {

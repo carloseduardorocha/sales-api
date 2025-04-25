@@ -13,7 +13,7 @@ return new class () extends Migration {
             $table->foreignId('seller_id')->constrained('sellers');
             $table->decimal('amount', 10, 2);
             $table->decimal('commission', 10, 2);
-            $table->date('sale_date');
+            $table->datetime('sale_date');
             $table->timestamps();
             $table->softDeletes();
         });

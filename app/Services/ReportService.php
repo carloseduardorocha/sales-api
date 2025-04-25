@@ -27,7 +27,7 @@ class ReportService implements ReportContract
         $admins = User::all();
 
         $admins->each(
-            fn ($admin) => SendAdminReportJob::dispatch($admin, $start_date, $final_date)
+            fn ($admin) => SendAdminReportJob::dispatch($admin, $start_date, $final_date)->onQueue('default')
         );
     }
 
@@ -36,7 +36,7 @@ class ReportService implements ReportContract
         $sellers = Seller::all();
 
         $sellers->each(
-            fn ($seller) => SendSellerReportJob::dispatch($seller, $start_date, $final_date)
+            fn ($seller) => SendSellerReportJob::dispatch($seller, $start_date, $final_date)->onQueue('default')
         );
     }
 

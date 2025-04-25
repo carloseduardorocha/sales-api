@@ -52,7 +52,7 @@
             <tbody>
                 @foreach($seller['sales'] as $sale)
                     <tr>
-                        <td>{{ \Carbon\Carbon::parse($sale['date'])->format('d/m/Y') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($sale['sale_date'])->format('d/m/Y') }}</td>
                         <td>R$ {{ number_format($sale['amount'] / 100, 2, ',', '.') }}</td>
                         <td>R$ {{ number_format($sale['commission'] / 100, 2, ',', '.') }}</td>
                     </tr>
