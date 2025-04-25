@@ -92,13 +92,31 @@ services:
             - '${FORWARD_MAILPIT_DASHBOARD_PORT:-8025}:8025'
         networks:
             - sail
-            
+
     memcached:
         image: 'memcached:alpine'
         ports:
             - '${FORWARD_MEMCACHED_PORT:-11211}:11211'
         networks:
             - sail
+
+    horizon:
+        build:
+            context: './vendor/laravel/sail/runtimes/8.4'
+            dockerfile: Dockerfile
+            args:
+                WWWGROUP: '${WWWGROUP}'
+        image: 'sail-8.4/app'
+        working_dir: /var/www/html
+        volumes:
+            - '.:/var/www/html'
+        networks:
+            - sail
+        depends_on:
+            - laravel.test
+            - redis
+        entrypoint: >
+            sh -c "php artisan horizon"
 
 networks:
     sail:
