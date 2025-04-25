@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\ReportController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +42,13 @@ Route::prefix('v1')->group(function() {
 
                 Route::get('/seller/{sellerId}/sales', 'getAllSalesBySeller')->name('sales_by_seller');
                 Route::get('/seller/{sellerId}/commission', 'getCommissionBySeller')->name('commission_by_seller');
+            });
+        });
+
+        Route::prefix('reports')->name('reports.')->group(function() {
+            Route::controller(ReportController::class)->group(function() {
+                Route::post('/admin/{userId}', 'sendAdminReport')->name('send_admin_report');
+                Route::post('/seller/{sellerId}', 'sendSellerReport')->name('send_seller_report');
             });
         });
     });
