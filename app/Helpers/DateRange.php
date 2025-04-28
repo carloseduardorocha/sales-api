@@ -25,7 +25,7 @@ class DateRange
     }
 
     /**
-     * Get the start and end timestamps for the previous month.
+     * Get the start and end timestamps for the last third days.
      *
      * @return array{
      *     start: \Carbon\Carbon,
@@ -34,11 +34,11 @@ class DateRange
      */
     public static function monthly(): array
     {
-        $last_month = Carbon::now()->subMonthNoOverflow();
+        $now = Carbon::now();
 
         return [
-            'start' => $last_month->copy()->startOfMonth(),
-            'end'   => $last_month->copy()->endOfMonth(),
+            'start' => $now->copy()->subDays(30),
+            'end'   => $now,
         ];
     }
 }
