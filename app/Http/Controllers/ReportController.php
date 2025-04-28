@@ -36,7 +36,7 @@ class ReportController extends Controller
             throw new UserNotFoundException();
         }
 
-        ['start' => $start_date, 'end' => $final_date] = DateRange::daily();
+        ['start' => $start_date, 'end' => $final_date] = DateRange::monthly();
         SendAdminReportJob::dispatch($admin, $start_date, $final_date)->onQueue('default');
 
         return ApiResponse::jsonSuccess(new JsonResource([]), Response::HTTP_OK, 'Admin report sent successfully!');
@@ -58,7 +58,7 @@ class ReportController extends Controller
             throw new SellerNotFoundException();
         }
 
-        ['start' => $start_date, 'end' => $final_date] = DateRange::daily();
+        ['start' => $start_date, 'end' => $final_date] = DateRange::monthly();
         SendSellerReportJob::dispatch($seller, $start_date, $final_date)->onQueue('default');
 
         return ApiResponse::jsonSuccess(new JsonResource([]), Response::HTTP_OK, 'Seller report sent successfully!');

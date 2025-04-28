@@ -14,7 +14,7 @@ class Sale
      */
     public static function all(): Collection
     {
-        return Model::all();
+        return Model::with('seller')->get();
     }
 
     /**
@@ -25,7 +25,7 @@ class Sale
      */
     public static function get(int $id): ?Model
     {
-        return Model::find($id);
+        return Model::where(Model::ID, $id)->with('seller')->first();
     }
 
     /**

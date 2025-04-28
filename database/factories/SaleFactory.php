@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use App\Models\Sale;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,7 +23,7 @@ class SaleFactory extends Factory
         return [
             'seller_id'  => fake()->numberBetween(1, 15),
             'amount'     => $this->faker->randomFloat(2, 10, 3000),
-            'sale_date'  => $this->faker->date(),
+            'sale_date'  => Carbon::now()->subDay(),
             'commission' => function(array $attributes) {
                 return $attributes['amount'] * 0.085;
             },
