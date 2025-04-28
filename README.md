@@ -22,6 +22,9 @@ Sales API has **four scheduled email routines** to ensure consistent communicati
   - **Admin Report** – sent on the 1st day of each month at `02:00`.
   - **Seller Report** – sent on the 1st day of each month at `02:30`.
 
+- You can change the routines recurrence on `routes/console.php` file.
+
+
 > **Important:**  
 > To enable the email system, it is **mandatory** to properly configure the email-related environment variables in your `.env` file.
 
