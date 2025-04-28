@@ -5,8 +5,8 @@ namespace Tests\Unit\Helpers;
 use App\Helpers\Logger;
 use Illuminate\Support\Facades\Log;
 use Tests\TestCase;
-use Throwable;
 use Exception;
+use Mockery;
 
 class LoggerTest extends TestCase
 {
@@ -19,7 +19,7 @@ class LoggerTest extends TestCase
 
         Log::shouldReceive('info')
             ->once()
-            ->with('Test message', \Mockery::on(function ($context) {
+            ->with('Test message', Mockery::on(function($context) {
                 return isset($context['env']);
             }));
 
@@ -35,7 +35,7 @@ class LoggerTest extends TestCase
 
         Log::shouldReceive('error')
             ->once()
-            ->with('Test error', \Mockery::on(function ($context) {
+            ->with('Test error', Mockery::on(function($context) {
                 return isset($context['Message'], $context['File'], $context['Stack Trace'], $context['env']);
             }));
 
@@ -46,7 +46,7 @@ class LoggerTest extends TestCase
     public function test_emergency_method(): void
     {
         Log::shouldReceive('channel')->once()->with('stack')->andReturnSelf();
-        Log::shouldReceive('emergency')->once()->with('Emergency!', \Mockery::any());
+        Log::shouldReceive('emergency')->once()->with('Emergency!', Mockery::any());
 
         Logger::emergency('Emergency!');
     }
@@ -54,7 +54,7 @@ class LoggerTest extends TestCase
     public function test_alert_method(): void
     {
         Log::shouldReceive('channel')->once()->with('stack')->andReturnSelf();
-        Log::shouldReceive('alert')->once()->with('Alert!', \Mockery::any());
+        Log::shouldReceive('alert')->once()->with('Alert!', Mockery::any());
 
         Logger::alert('Alert!');
     }
@@ -62,7 +62,7 @@ class LoggerTest extends TestCase
     public function test_critical_method(): void
     {
         Log::shouldReceive('channel')->once()->with('stack')->andReturnSelf();
-        Log::shouldReceive('critical')->once()->with('Critical!', \Mockery::any());
+        Log::shouldReceive('critical')->once()->with('Critical!', Mockery::any());
 
         Logger::critical('Critical!');
     }
@@ -70,7 +70,7 @@ class LoggerTest extends TestCase
     public function test_error_method(): void
     {
         Log::shouldReceive('channel')->once()->with('stack')->andReturnSelf();
-        Log::shouldReceive('error')->once()->with('Error!', \Mockery::any());
+        Log::shouldReceive('error')->once()->with('Error!', Mockery::any());
 
         Logger::error('Error!');
     }
@@ -78,7 +78,7 @@ class LoggerTest extends TestCase
     public function test_warning_method(): void
     {
         Log::shouldReceive('channel')->once()->with('stack')->andReturnSelf();
-        Log::shouldReceive('warning')->once()->with('Warning!', \Mockery::any());
+        Log::shouldReceive('warning')->once()->with('Warning!', Mockery::any());
 
         Logger::warning('Warning!');
     }
@@ -86,7 +86,7 @@ class LoggerTest extends TestCase
     public function test_notice_method(): void
     {
         Log::shouldReceive('channel')->once()->with('stack')->andReturnSelf();
-        Log::shouldReceive('notice')->once()->with('Notice!', \Mockery::any());
+        Log::shouldReceive('notice')->once()->with('Notice!', Mockery::any());
 
         Logger::notice('Notice!');
     }
@@ -94,7 +94,7 @@ class LoggerTest extends TestCase
     public function test_info_method(): void
     {
         Log::shouldReceive('channel')->once()->with('stack')->andReturnSelf();
-        Log::shouldReceive('info')->once()->with('Info!', \Mockery::any());
+        Log::shouldReceive('info')->once()->with('Info!', Mockery::any());
 
         Logger::info('Info!');
     }
@@ -102,7 +102,7 @@ class LoggerTest extends TestCase
     public function test_debug_method(): void
     {
         Log::shouldReceive('channel')->once()->with('stack')->andReturnSelf();
-        Log::shouldReceive('debug')->once()->with('Debug!', \Mockery::any());
+        Log::shouldReceive('debug')->once()->with('Debug!', Mockery::any());
 
         Logger::debug('Debug!');
     }
@@ -113,7 +113,7 @@ class LoggerTest extends TestCase
         $this->expectExceptionMessage('Test exception');
 
         Log::shouldReceive('channel')->once()->with('stack')->andReturnSelf();
-        Log::shouldReceive('error')->once()->with('Test exception', \Mockery::any());
+        Log::shouldReceive('error')->once()->with('Test exception', Mockery::any());
 
         Logger::throwExceptionAndLog('Test exception');
     }

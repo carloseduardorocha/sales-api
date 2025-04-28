@@ -9,14 +9,12 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Http\Request;
 
 class ApiResponseTest extends TestCase
 {
     public function test_format_returns_successful_response(): void
     {
-        $data = ['key' => 'value'];
+        $data     = ['key' => 'value'];
         $response = ApiResponse::format(true, $data, 'Success message');
 
         $this->assertEquals([
@@ -28,7 +26,7 @@ class ApiResponseTest extends TestCase
 
     public function test_format_returns_failure_response_with_error_slug(): void
     {
-        $data = [];
+        $data     = [];
         $response = ApiResponse::format(false, $data, 'Error message', 'error_slug');
 
         $this->assertEquals([
@@ -87,10 +85,13 @@ class ApiResponseTest extends TestCase
             ['email' => 'required|email']
         );
 
-        try {
+        try
+        {
             ApiResponse::jsonRequestValidationError($validator);
             $this->fail('Expected HttpResponseException was not thrown.');
-        } catch (HttpResponseException $e) {
+        }
+        catch (HttpResponseException $e)
+        {
             $response = $e->getResponse();
             $this->assertInstanceOf(JsonResponse::class, $response);
             $this->assertEquals(422, $response->getStatusCode());
@@ -105,10 +106,13 @@ class ApiResponseTest extends TestCase
 
     public function test_json_request_forbidden_throws_http_response_exception(): void
     {
-        try {
+        try
+        {
             ApiResponse::jsonRequestForbidden();
             $this->fail('Expected HttpResponseException was not thrown.');
-        } catch (HttpResponseException $e) {
+        }
+        catch (HttpResponseException $e)
+        {
             $response = $e->getResponse();
             $this->assertInstanceOf(JsonResponse::class, $response);
             $this->assertEquals(403, $response->getStatusCode());

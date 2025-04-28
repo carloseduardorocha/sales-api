@@ -15,7 +15,7 @@ class DateRangeTest extends TestCase
         $range = DateRange::daily();
 
         $expectedStart = Carbon::yesterday()->startOfDay();
-        $expectedEnd = Carbon::yesterday()->endOfDay();
+        $expectedEnd   = Carbon::yesterday()->endOfDay();
 
         $this->assertTrue($range['start']->equalTo($expectedStart));
         $this->assertTrue($range['end']->equalTo($expectedEnd));
@@ -30,7 +30,7 @@ class DateRangeTest extends TestCase
         $range = DateRange::monthly();
 
         $expectedStart = Carbon::now()->copy()->subDays(30);
-        $expectedEnd = Carbon::now();
+        $expectedEnd   = Carbon::now();
 
         $this->assertTrue($range['start']->equalTo($expectedStart));
         $this->assertTrue($range['end']->equalTo($expectedEnd));
